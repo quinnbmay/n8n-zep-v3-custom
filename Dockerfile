@@ -22,9 +22,8 @@ WORKDIR /home/node
 # Expose n8n port
 EXPOSE 5678
 
-# Health check to ensure n8n starts properly
-HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-  CMD curl -f http://localhost:5678/healthz || exit 1
+# Use the same entrypoint as the base image
+ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
 
-# Start n8n
+# Start n8n using the base image's default command
 CMD ["n8n"]
