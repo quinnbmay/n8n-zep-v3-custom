@@ -13,17 +13,11 @@ RUN mkdir -p /home/node/.n8n/custom && \
     chown -R node:node /home/node/.n8n && \
     echo "✅ Zep v3 community node installed successfully"
 
-# Switch back to node user for security
+# Switch back to node user for security  
 USER node
 
-# Set working directory  
+# Set working directory
 WORKDIR /home/node
 
 # Expose n8n port
 EXPOSE 5678
-
-# Use the same entrypoint as the base image
-ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
-
-# Start n8n using the base image's default command
-CMD ["n8n"]
